@@ -10,7 +10,7 @@ namespace ClassLibrary
 {
     public class Employee
     {
-        string FirstName, LastName, Department, Sex;
-        int Age, Salary;
+        public string FirstName, LastName, Department, Sex;
+        public int Age, Salary;
     }
 }

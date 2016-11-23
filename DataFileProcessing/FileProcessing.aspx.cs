@@ -13,12 +13,13 @@ namespace DataFileProcessing
     {
         
         protected void Page_Load(object sender, EventArgs e)
-        {
-            
+        {           
             Label1.Text = "Process Employee File For ABC Company";
             Button1.Text = "Submit";
+        }
 
-
+        protected void Button1_Click(object sender, EventArgs e)
+        {
             if (IsPostBack)
             {
                 bool fileOK = false;
@@ -26,7 +27,7 @@ namespace DataFileProcessing
                 if (FileUpload1.HasFile)
                 {
                     string fileExtension = System.IO.Path.GetExtension(FileUpload1.FileName).ToLower();
-                    string[] allowedExtensions = {".xml", ".txt", ".csv"};
+                    string[] allowedExtensions = { ".xml", ".txt", ".csv" };
                     for (int i = 0; i < allowedExtensions.Length; i++)
                     {
                         if (fileExtension == allowedExtensions[i])
@@ -41,7 +42,9 @@ namespace DataFileProcessing
                 {
                     if (Path.GetExtension(FileUpload1.FileName).ToLower() == ".xml")
                     {
+
                         FileProcessor.ProcessorXmlFile(FileUpload1);
+                        // FileDisplay.GetEmployees();
                     }
 
                     else if (Path.GetExtension(FileUpload1.FileName).ToLower() == ".txt")
@@ -60,8 +63,6 @@ namespace DataFileProcessing
                     Label1.Text = "Cannot accept files of this type.";
                 }
             }
-
-
         }
     }
 }

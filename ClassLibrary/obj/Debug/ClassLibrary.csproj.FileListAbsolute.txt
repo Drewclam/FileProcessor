@@ -1,1 +1,5 @@
-c:\users\alam\documents\visual studio 2015\Projects\DataFileProcessing\ClassLibrary\obj\Debug\ClassLibrary.csprojResolveAssemblyReference.cache
+C:\Users\alam\Documents\Visual Studio 2015\Projects\DataFileProcessing\ClassLibrary\obj\Debug\ClassLibrary.csprojResolveAssemblyReference.cache
+C:\Users\alam\Documents\Visual Studio 2015\Projects\DataFileProcessing\ClassLibrary\bin\Debug\ClassLibrary.dll
+C:\Users\alam\Documents\Visual Studio 2015\Projects\DataFileProcessing\ClassLibrary\bin\Debug\ClassLibrary.pdb
+C:\Users\alam\Documents\Visual Studio 2015\Projects\DataFileProcessing\ClassLibrary\obj\Debug\ClassLibrary.dll
+C:\Users\alam\Documents\Visual Studio 2015\Projects\DataFileProcessing\ClassLibrary\obj\Debug\ClassLibrary.pdb

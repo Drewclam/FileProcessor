@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class FileDisplay
+    public class FileDisplay
     {
         // Loops through employee list in FileProcessor and creates DataTable object
-        public DataTable GetEmployees()
-        {
-            return;
-        }
+        //public DataTable GetEmployees()
+        //{
+            
+        //}
     }
 }
