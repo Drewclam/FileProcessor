@@ -24,9 +24,10 @@ namespace DataFileProcessing
             {
                 bool fileOK = false;
                 string path = Server.MapPath("~/UploadedImages/");
+                string fileExtension = "";
                 if (FileUpload1.HasFile)
                 {
-                    string fileExtension = System.IO.Path.GetExtension(FileUpload1.FileName).ToLower();
+                    fileExtension = System.IO.Path.GetExtension(FileUpload1.FileName).ToLower();
                     string[] allowedExtensions = { ".xml", ".txt", ".csv" };
                     for (int i = 0; i < allowedExtensions.Length; i++)
                     {
@@ -40,19 +41,18 @@ namespace DataFileProcessing
                 // Use the appropriate processor to read the file
                 if (fileOK == true)
                 {
-                    if (Path.GetExtension(FileUpload1.FileName).ToLower() == ".xml")
+                    if (fileExtension == ".xml")
                     {
-
                         FileProcessor.ProcessorXmlFile(FileUpload1);
                         // FileDisplay.GetEmployees();
                     }
 
-                    else if (Path.GetExtension(FileUpload1.FileName).ToLower() == ".txt")
+                    else if (fileExtension == ".txt")
                     {
                         FileProcessor.ProcessorTxtFile(FileUpload1);
                     }
 
-                    else if (Path.GetExtension(FileUpload1.FileName).ToLower() == ".csv")
+                    else if (fileExtension == ".csv")
                     {
                         FileProcessor.ProcessorCsvFile(FileUpload1);
                     }

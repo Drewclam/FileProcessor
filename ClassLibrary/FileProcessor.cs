@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
+using System.Xml;
 
 namespace ClassLibrary
 {
@@ -15,67 +16,67 @@ namespace ClassLibrary
         public static void ProcessorTxtFile(FileUpload fu)
         {
             StreamReader reader = new StreamReader(fu.FileContent);
+
             do
             {
                 string textLine = reader.ReadLine();
-                // All information for each employee stored in whole string 
-                string[] parseTextLine = textLine.Split('\n');
-                foreach (string item in parseTextLine)
-                {
 
-                    empList.Add(new Employee() { FirstName = item.Substring(0, 9), LastName = item.Substring(10, 9),
-                                                 Department = item.Substring(20, 11),
-                                                 Age = Convert.ToInt32(item.Substring(40,2)), Sex = item.Substring(42,1),
-                                                 Salary = Convert.ToInt32(item.Substring(44,5)) });
-                }
-                //string EmployeeInfo = "";
-
-                //foreach (string item in textLineEmployee)
-                //{
-                //    string temp = "";
-                //    for (int i = 0; i < item.Length; i++)
-                //    {
-                //        if (item[i].ToString() == " " && temp != "")
-                //        {
-                //            EmployeeInfo += temp +",";
-                //            temp = ""; 
-                //        }
-
-                //        else if (item[i].ToString() != " ")
-                //        {
-                //            temp += item[i].ToString();
-                //        }
-
-                //        if (i == item.Length-1)
-                //        {
-                //            EmployeeInfo += temp;
-                //        }
-                //    }
-                //}
-                //string[] arr = EmployeeInfo.Split(',');
-                //empList.Add(new Employee() { FirstName = arr[0], LastName = arr[1], Department = arr[2] });
+                empList.Add(new Employee() { FirstName = textLine.Substring(0, 9), LastName = textLine.Substring(10, 9),
+                    Department = textLine.Substring(20, 11), Age = Convert.ToInt32(textLine.Substring(40,2)), Sex = textLine.Substring(42,1),
+                    Salary = Convert.ToInt32(textLine.Substring(44,5)) });               
             } while (reader.Peek() != -1);
+
             reader.Close();
 
         }
+
         public static void ProcessorCsvFile(FileUpload fu)
         {
             StreamReader reader = new StreamReader(fu.FileContent);
+
             do
             {
                 string textLine = reader.ReadLine();
-
-                // do your coding 
                 string[] csvData = textLine.Split(',');
-                //Loop trough txt file and add employees to FileProcessor.empList  
 
+                empList.Add(new Employee()
+                { FirstName = csvData[0], LastName = csvData[1], Department = csvData[2], Age = Convert.ToInt32(csvData[3]), Sex = csvData[4],  Salary = Convert.ToInt32(csvData[5])});
             } while (reader.Peek() != -1);
+
             reader.Close();
-
-
         }
+
         public static void ProcessorXmlFile(FileUpload fu)
         {
+            string inputContent;
+            using (StreamReader inputStreamReader = new StreamReader(fu.PostedFile.InputStream))
+            {
+                inputContent = inputStreamReader.ReadToEnd();
+            }
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(inputContent);
+
+            // Create node lists by department
+            XmlNodeList deptList = doc.DocumentElement.SelectNodes("/employees/department");
+
+            // Loop through employees and extract data
+            foreach (XmlNode node in deptList)
+            {
+                for (int i = 0; i < node.ChildNodes.Count; i++)
+                {
+                    empList.Add(new Employee()
+                    {
+                        FirstName = node.ChildNodes[i].ChildNodes[0].InnerText,
+                        LastName = node.ChildNodes[i].ChildNodes[1].InnerText,
+                        Age = Convert.ToInt32(node.ChildNodes[i].ChildNodes[2].InnerText),
+                        Sex = node.ChildNodes[i].ChildNodes[3].InnerText,
+                        Salary = Convert.ToInt32(node.ChildNodes[i].ChildNodes[4].InnerText),
+                        Department = node.Attributes["name"].InnerText
+                    });
+                    
+                }
+            }
+
 
         }
     }
