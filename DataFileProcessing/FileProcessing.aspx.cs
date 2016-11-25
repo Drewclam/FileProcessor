@@ -16,6 +16,10 @@ namespace DataFileProcessing
         {           
             Label1.Text = "Process Employee File For ABC Company";
             Button1.Text = "Submit";
+            ObjectDataSource1.SelectMethod = "GetEmployees";
+            ObjectDataSource1.TypeName = "ClassLibrary.FileDisplay";
+            GridView1.DataSourceID = "ObjectDataSource1";
+            // GridView1.ItemTemplate = ObjectDataSource1;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -38,23 +42,26 @@ namespace DataFileProcessing
                     }
                 }
 
+                FileDisplay initFileDisplay = new FileDisplay();
                 // Use the appropriate processor to read the file
                 if (fileOK == true)
                 {
                     if (fileExtension == ".xml")
                     {
                         FileProcessor.ProcessorXmlFile(FileUpload1);
-                        // FileDisplay.GetEmployees();
+                        initFileDisplay.GetEmployees();
                     }
 
                     else if (fileExtension == ".txt")
                     {
                         FileProcessor.ProcessorTxtFile(FileUpload1);
+                        initFileDisplay.GetEmployees();
                     }
 
                     else if (fileExtension == ".csv")
                     {
                         FileProcessor.ProcessorCsvFile(FileUpload1);
+                        initFileDisplay.GetEmployees();
                     }
                 }
 

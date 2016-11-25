@@ -11,12 +11,13 @@ namespace ClassLibrary
 {
     public static class FileProcessor
     {
-        // Parse uploaded files and append to empList
+        // Store employees here
         public static List<Employee> empList = new List<Employee>();
+
+        // Text File Processor
         public static void ProcessorTxtFile(FileUpload fu)
         {
             StreamReader reader = new StreamReader(fu.FileContent);
-
             do
             {
                 string textLine = reader.ReadLine();
@@ -27,13 +28,13 @@ namespace ClassLibrary
             } while (reader.Peek() != -1);
 
             reader.Close();
-
         }
 
+
+        // CSV File Processor
         public static void ProcessorCsvFile(FileUpload fu)
         {
             StreamReader reader = new StreamReader(fu.FileContent);
-
             do
             {
                 string textLine = reader.ReadLine();
@@ -46,6 +47,8 @@ namespace ClassLibrary
             reader.Close();
         }
 
+
+        // XML File Processor
         public static void ProcessorXmlFile(FileUpload fu)
         {
             string inputContent;
@@ -53,6 +56,7 @@ namespace ClassLibrary
             {
                 inputContent = inputStreamReader.ReadToEnd();
             }
+
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(inputContent);
 

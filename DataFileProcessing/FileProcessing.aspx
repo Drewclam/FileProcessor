@@ -24,10 +24,12 @@
         <br />
         <br />
 
-        <asp:ListView ID="ListView1" runat="server"></asp:ListView>
+        <!-- ListView requires a template -->
+        <asp:GridView ID="GridView1" runat="server"></asp:GridView>
 
         <asp:ObjectDataSource ID="ObjectDataSource1" runat="server"></asp:ObjectDataSource>
     </div>
     </form>
 </body>
 </html>
+

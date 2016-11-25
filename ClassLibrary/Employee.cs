@@ -11,6 +11,7 @@ namespace ClassLibrary
     public class Employee
     {
         public string FirstName, LastName, Department, Sex;
-        public int Age, Salary;
+        public int Age, Salary;       
     }
+    
 }
